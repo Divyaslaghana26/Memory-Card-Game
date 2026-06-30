@@ -1,0 +1,35 @@
+class Menu {
+    static function int selectDifficulty() {
+        var int choice;
+        do Screen.clearScreen();
+        do Output.moveCursor(5, 10);
+        do Output.printString("Select Difficulty:");
+        do Output.moveCursor(7, 10);
+        do Output.printString("1. Easy (4x4)");
+        do Output.moveCursor(8, 10);
+        do Output.printString("2. Medium (6x6)");
+        do Output.moveCursor(9, 10);
+        do Output.printString("3. Hard (8x8)");
+
+        while (~Keyboard.keyPressed()) {}
+        let choice = Keyboard.keyPressed() - 48;
+        while (Keyboard.keyPressed()) {}
+        return choice;
+    }
+
+    static function int selectPlayerCount() {
+        var int choice;
+        do Screen.clearScreen();
+        do Output.moveCursor(5, 10);
+        do Output.printString("Select Players:");
+        do Output.moveCursor(7, 10);
+        do Output.printString("1. Single Player");
+        do Output.moveCursor(8, 10);
+        do Output.printString("2. Two Players");
+
+        while (~Keyboard.keyPressed()) {}
+        let choice = Keyboard.keyPressed() - 48;
+        while (Keyboard.keyPressed()) {}
+        return choice;
+    }
+}

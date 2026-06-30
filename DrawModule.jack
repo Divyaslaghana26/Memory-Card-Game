@@ -1,0 +1,13 @@
+class DrawModule {
+    static function void drawScoreboard(int p1, int p2, int current) {
+        return;
+    }
+
+    static function void showTitle() {
+        return;
+    }
+
+    static function void showGameOver(int winner) {
+        return;
+    }
+}

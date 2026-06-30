@@ -1,0 +1,49 @@
+class Scoreboard {
+    field Array playerScores;
+    field int currentPlayer;
+    field int highScore;
+    
+    constructor Scoreboard new(int playerCount) {
+        var int i;
+        
+        let playerScores = Array.new(playerCount);
+        let currentPlayer = 0;
+        let highScore = 0;
+        
+        let i = 0;
+        while (i < playerCount) {
+            let playerScores[i] = 0;
+            let i = i + 1;
+        }
+        return this;
+    }
+    
+    method void addScore(int points) {
+        let playerScores[currentPlayer] = playerScores[currentPlayer] + points;
+        if (playerScores[currentPlayer] > highScore) {
+            let highScore = playerScores[currentPlayer];
+        }
+        return;
+    }
+    
+    method void nextPlayer() {
+        let currentPlayer = currentPlayer + 1;
+        if (currentPlayer = playerScores.length()) {
+            let currentPlayer = 0;
+        }
+        return;
+    }
+    
+    method int getPlayerScore(int player) {
+        return playerScores[player - 1];
+    }
+    
+    method int getCurrentPlayer() {
+        return currentPlayer + 1;
+    }
+    
+    method void saveHighScore() {
+        // Implementation would go here
+        return;
+    }
+}

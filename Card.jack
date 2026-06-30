@@ -1,0 +1,52 @@
+class Card {
+    field int value;
+    field int state;
+    field int x, y;
+    field int width, height;
+    field int backStyle;
+    
+    constructor Card new(int v, int sx, int sy, int w, int h, int style) {
+        let value = v;
+        let state = 0;
+        let x = sx;
+        let y = sy;
+        let width = w;
+        let height = h;
+        let backStyle = style;
+        return this;
+    }
+    
+    method void flip() {
+        if (state = 0) {
+            let state = 1;
+        }
+        else {
+            let state = 0;
+        }
+        do draw();
+        return;
+    }
+    
+    method void setMatched() {
+        let state = 2;
+        do draw();
+        return;
+    }
+    
+    method void draw() {
+        do DrawModule.drawCard(x, y, width, height, state, value, backStyle);
+        return;
+    }
+    
+    method boolean isFaceUp() {
+        return (state = 1);
+    }
+    
+    method boolean isMatched() {
+        return (state = 2);
+    }
+    
+    method int getValue() {
+        return value;
+    }
+}

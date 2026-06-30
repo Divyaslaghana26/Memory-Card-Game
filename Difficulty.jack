@@ -1,0 +1,11 @@
+class Difficulty {
+    static function int getBoardSize(int level) {
+        if (level = 1) {
+            return 4;
+        } elseif (level = 2) {
+            return 6;
+        } else {
+            return 8;
+        }
+    }
+}

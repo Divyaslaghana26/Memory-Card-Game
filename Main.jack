@@ -1,0 +1,21 @@
+class Main {
+    function void main() {
+        var Game game;
+        var int difficulty, players;
+
+        do DrawModule.showTitle();
+
+        while (~Keyboard.keyPressed()) {}
+        while (Keyboard.keyPressed()) {}
+
+        let difficulty = Menu.selectDifficulty();
+        let players = Menu.selectPlayerCount();
+
+        let game = Game.new(Difficulty.getBoardSize(difficulty), difficulty, players);
+        do game.run();
+
+        do DrawModule.showGameOver(game.getWinner());
+        do Sys.wait(3000);
+        return;
+    }
+}

@@ -1,0 +1,38 @@
+function Main.main 3
+call DrawModule.showTitle 0
+pop temp 0
+label WHILE_EXP0
+call Keyboard.keyPressed 0
+not
+not
+if-goto WHILE_END0
+goto WHILE_EXP0
+label WHILE_END0
+label WHILE_EXP1
+call Keyboard.keyPressed 0
+not
+if-goto WHILE_END1
+goto WHILE_EXP1
+label WHILE_END1
+call Menu.selectDifficulty 0
+pop local 1
+call Menu.selectPlayerCount 0
+pop local 2
+push local 1
+call Difficulty.getBoardSize 1
+push local 1
+push local 2
+call Game.new 3
+pop local 0
+push local 0
+call Game.run 1
+pop temp 0
+push local 0
+call Game.getWinner 1
+call DrawModule.showGameOver 1
+pop temp 0
+push constant 3000
+call Sys.wait 1
+pop temp 0
+push constant 0
+return

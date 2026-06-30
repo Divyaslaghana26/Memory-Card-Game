@@ -1,0 +1,104 @@
+class Game {
+    field int boardSize;
+    field Array cards;
+    field Scoreboard scoreboard;
+    field int firstSelection, secondSelection;
+    field int difficulty;
+    field int playerCount;
+    field boolean gameOver;
+
+    constructor Game new(int size, int diff, int players) {
+        let boardSize = size;
+        let difficulty = diff;
+        let playerCount = players;
+        let scoreboard = Scoreboard.new(players);
+        let cards = Array.new(size * size);
+        let firstSelection = -1;
+        let secondSelection = -1;
+        let gameOver = false;
+        do initializeCards();
+        return this;
+    }
+
+    method void initializeCards() {
+        var int i, pairs, cardW, cardH;
+        var int x1, y1, x2, y2;
+        let pairs = (boardSize * boardSize) / 2;
+        let cardW = 500 / boardSize;
+        let cardH = 300 / boardSize;
+        let i = 0;
+        while (i < pairs) {
+            let x1 = Math.floor(Math.multiply(Math.random(), boardSize));
+            let y1 = Math.floor(Math.multiply(Math.random(), boardSize));
+            let x2 = Math.floor(Math.multiply(Math.random(), boardSize));
+            let y2 = Math.floor(Math.multiply(Math.random(), boardSize));
+
+            while ((x1 = x2) & (y1 = y2)) {
+                let x2 = Math.floor(Math.multiply(Math.random(), boardSize));
+                let y2 = Math.floor(Math.multiply(Math.random(), boardSize));
+            }
+
+            let cards[x1 + y1 * boardSize] = Card.new(i, x1 * cardW + 5, y1 * cardH + 35, cardW - 10, cardH - 10, difficulty);
+            let cards[x2 + y2 * boardSize] = Card.new(i, x2 * cardW + 5, y2 * cardH + 35, cardW - 10, cardH - 10, difficulty);
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void run() {
+        while (~gameOver) {
+            do update();
+            do render();
+            do Sys.wait(50);
+        }
+        return;
+    }
+
+    method void update() {
+        if ((firstSelection = -1) & (secondSelection = -1)) {
+            do handleInput();
+        } else {
+            if ((firstSelection > -1) & (secondSelection > -1)) {
+                do checkMatch();
+            }
+        }
+        return;
+    }
+
+    method void render() {
+        do Screen.clearScreen();
+        var int p1Score, p2Score, currentPlayer, i;
+        var Card tempCard;
+
+        let p1Score = scoreboard.getPlayerScore(1);
+        let p2Score = scoreboard.getPlayerScore(2);
+        let currentPlayer = scoreboard.getCurrentPlayer();
+        do DrawModule.drawScoreboard(p1Score, p2Score, currentPlayer);
+
+        let i = 0;
+        while (i < boardSize * boardSize) {
+            let tempCard = cards[i];
+            do tempCard.draw();
+            let i = i + 1;
+        }
+        return;
+    }
+
+    method void handleInput() {
+        // Placeholder for input handling
+        return;
+    }
+
+    method void checkMatch() {
+        // Placeholder for match logic
+        return;
+    }
+
+    method int getWinner() {
+        if (scoreboard.getPlayerScore(1) > scoreboard.getPlayerScore(2)) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+}
